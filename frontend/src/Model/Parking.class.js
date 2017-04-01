@@ -33,7 +33,7 @@ export default class Parking {
         return this._numOfTruckSlots;
     }
 
-    get numOfFreeSlots() {
+    get freeSlots() {
         return this.numOfStandardSlots + this.numOfDisabledSlots + this.numOfTruckSlots - this._occupiedSlots.size;
     }
 
@@ -43,13 +43,13 @@ export default class Parking {
 
     _createSlots() {
         let i;
-        for(i = 1; i <=_this._standardSlots.length; i++) {
+        for(i = 1; i <= this._standardSlots.length; i++) {
             this._standardSlots.push(new StandardParkingSlot(i));
         }
-        for(i = 1; i <=_this._disabledSlots.length; i++) {
+        for(i = 1; i <= this._disabledSlots.length; i++) {
             this._disabledSlots.push(new DisabledParkingSlot(i));
         }
-        for(i = 1; i <=_this._truckSlots.length; i++) {
+        for(i = 1; i <= this._truckSlots.length; i++) {
             this._truckSlots.push(new TruckParkingSlot(i));
         }
     }
@@ -102,5 +102,16 @@ export default class Parking {
         let uniqueToken = Math.random();
         this._occupiedSlots.set(uniqueToken, slot);
         return uniqueToken;
+    }
+
+    getParkingStatus() {
+        return {
+            freeSlots: this.numOfFreeSlots,
+            busySlots: this.busySlots,
+            // busyBySedan: 10,
+            // busyByTruck: 5,
+            // busyByHandicapped: 3,
+            // freeSedan: 20
+        };
     }
 }
